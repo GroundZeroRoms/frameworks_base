@@ -105,11 +105,8 @@ import com.google.android.collect.Lists;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-<<<<<<< HEAD
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.Executor;
-=======
->>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
 
 /**
  * Display the documents inside a single directory.
@@ -1099,7 +1096,6 @@ public class DirectoryFragment extends Fragment {
         }
     }
 
-<<<<<<< HEAD
     private class DeleteFilesTask extends AsyncTask<Void, Integer, Boolean> {
         private final DocumentInfo[] mDocs;
         private ProgressDialog mProgressDialog;
@@ -1139,8 +1135,6 @@ public class DirectoryFragment extends Fragment {
         }
     }
 
-=======
->>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
     private static class ThumbnailAsyncTask extends AsyncTask<Uri, Void, Bitmap>
             implements Preemptable {
         private final Uri mUri;
