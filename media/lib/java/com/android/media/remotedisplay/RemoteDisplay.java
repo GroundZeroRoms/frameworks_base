@@ -16,12 +16,20 @@
 
 package com.android.media.remotedisplay;
 
+<<<<<<< HEAD
 import com.android.internal.util.Objects;
 
+=======
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
 import android.media.MediaRouter;
 import android.media.RemoteDisplayState.RemoteDisplayInfo;
 import android.text.TextUtils;
 
+<<<<<<< HEAD
+=======
+import java.util.Objects;
+
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
 /**
  * Represents a remote display that has been discovered.
  */
@@ -87,7 +95,11 @@ public class RemoteDisplay {
     }
 
     public void setName(String name) {
+<<<<<<< HEAD
         if (!Objects.equal(mMutableInfo.name, name)) {
+=======
+        if (!Objects.equals(mMutableInfo.name, name)) {
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
             mMutableInfo.name = name;
             mImmutableInfo = null;
         }
@@ -98,7 +110,11 @@ public class RemoteDisplay {
     }
 
     public void setDescription(String description) {
+<<<<<<< HEAD
         if (!Objects.equal(mMutableInfo.description, description)) {
+=======
+        if (!Objects.equals(mMutableInfo.description, description)) {
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
             mMutableInfo.description = description;
             mImmutableInfo = null;
         }

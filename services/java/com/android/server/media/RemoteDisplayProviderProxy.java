@@ -16,8 +16,11 @@
 
 package com.android.server.media;
 
+<<<<<<< HEAD
 import com.android.internal.util.Objects;
 
+=======
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -35,6 +38,10 @@ import android.util.Slog;
 
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
+<<<<<<< HEAD
+=======
+import java.util.Objects;
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
 
 /**
  * Maintains a connection to a particular remote display provider service.
@@ -101,7 +108,11 @@ final class RemoteDisplayProviderProxy implements ServiceConnection {
     }
 
     public void setSelectedDisplay(String id) {
+<<<<<<< HEAD
         if (!Objects.equal(mSelectedDisplayId, id)) {
+=======
+        if (!Objects.equals(mSelectedDisplayId, id)) {
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
             if (mConnectionReady && mSelectedDisplayId != null) {
                 mActiveConnection.disconnect(mSelectedDisplayId);
             }
@@ -293,7 +304,11 @@ final class RemoteDisplayProviderProxy implements ServiceConnection {
     }
 
     private void setDisplayState(RemoteDisplayState state) {
+<<<<<<< HEAD
         if (!Objects.equal(mDisplayState, state)) {
+=======
+        if (!Objects.equals(mDisplayState, state)) {
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
             mDisplayState = state;
             if (!mScheduledDisplayStateChangedCallback) {
                 mScheduledDisplayStateChangedCallback = true;

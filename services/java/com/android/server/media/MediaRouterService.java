@@ -16,7 +16,10 @@
 
 package com.android.server.media;
 
+<<<<<<< HEAD
 import com.android.internal.util.Objects;
+=======
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
 import com.android.server.Watchdog;
 
 import android.Manifest;
@@ -52,6 +55,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+<<<<<<< HEAD
+=======
+import java.util.Objects;
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
 
 /**
  * Provides a mechanism for discovering media routes and manages media playback
@@ -384,7 +391,11 @@ public final class MediaRouterService extends IMediaRouterService.Stub
         ClientRecord clientRecord = mAllClientRecords.get(client.asBinder());
         if (clientRecord != null) {
             final String oldRouteId = clientRecord.mSelectedRouteId;
+<<<<<<< HEAD
             if (!Objects.equal(routeId, oldRouteId)) {
+=======
+            if (!Objects.equals(routeId, oldRouteId)) {
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
                 if (DEBUG) {
                     Slog.d(TAG, clientRecord + ": Set selected route, routeId=" + routeId
                             + ", oldRouteId=" + oldRouteId
@@ -1257,12 +1268,20 @@ public final class MediaRouterService extends IMediaRouterService.Stub
                     mDescriptor = descriptor;
                     if (descriptor != null) {
                         final String name = computeName(descriptor);
+<<<<<<< HEAD
                         if (!Objects.equal(mMutableInfo.name, name)) {
+=======
+                        if (!Objects.equals(mMutableInfo.name, name)) {
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
                             mMutableInfo.name = name;
                             changed = true;
                         }
                         final String description = computeDescription(descriptor);
+<<<<<<< HEAD
                         if (!Objects.equal(mMutableInfo.description, description)) {
+=======
+                        if (!Objects.equals(mMutableInfo.description, description)) {
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
                             mMutableInfo.description = description;
                             changed = true;
                         }

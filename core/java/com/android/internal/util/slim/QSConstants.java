@@ -39,6 +39,10 @@ public class QSConstants {
         public static final String TILE_SLEEP = "toggleSleepMode";
         public static final String TILE_LTE = "toggleLte";
         public static final String TILE_NFC = "toggleNfc";
+<<<<<<< HEAD
+=======
+        public static final String TILE_QUICKRECORD = "toggleQuickRecord";
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
         public static final String TILE_QUIETHOURS = "toggleQuietHours";
         public static final String TILE_VOLUME = "toggleVolume";
         public static final String TILE_EXPANDEDDESKTOP = "toggleExpandedDesktop";

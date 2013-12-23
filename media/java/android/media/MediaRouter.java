@@ -16,8 +16,11 @@
 
 package android.media;
 
+<<<<<<< HEAD
 import com.android.internal.util.Objects;
 
+=======
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
 import android.Manifest;
 import android.app.ActivityThread;
 import android.content.BroadcastReceiver;
@@ -43,6 +46,7 @@ import android.view.Display;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -323,6 +327,7 @@ public class MediaRouter {
                 if (route.updatePresentationDisplay() || (route.mPresentationDisplay != null
                         && route.mPresentationDisplay.getDisplayId() == changedDisplayId)) {
                     dispatchRoutePresentationDisplayChanged(route);
+<<<<<<< HEAD
                 }
             }
         }
@@ -455,10 +460,147 @@ public class MediaRouter {
                             route.mGlobalRouteId, volume);
                 } catch (RemoteException ex) {
                     Log.w(TAG, "Unable to request volume change.", ex);
+=======
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
                 }
             }
         }
 
+<<<<<<< HEAD
+=======
+        void setSelectedRoute(RouteInfo info, boolean explicit) {
+            // Must be non-reentrant.
+            mSelectedRoute = info;
+            publishClientSelectedRoute(explicit);
+        }
+
+        void rebindAsUser(int userId) {
+            if (mCurrentUserId != userId || userId < 0 || mClient == null) {
+                if (mClient != null) {
+                    try {
+                        mMediaRouterService.unregisterClient(mClient);
+                    } catch (RemoteException ex) {
+                        Log.e(TAG, "Unable to unregister media router client.", ex);
+                    }
+                    mClient = null;
+                }
+
+                mCurrentUserId = userId;
+
+                try {
+                    Client client = new Client();
+                    mMediaRouterService.registerClientAsUser(client,
+                            mAppContext.getPackageName(), userId);
+                    mClient = client;
+                } catch (RemoteException ex) {
+                    Log.e(TAG, "Unable to register media router client.", ex);
+                }
+
+                publishClientDiscoveryRequest();
+                publishClientSelectedRoute(false);
+                updateClientState();
+            }
+        }
+
+        void publishClientDiscoveryRequest() {
+            if (mClient != null) {
+                try {
+                    mMediaRouterService.setDiscoveryRequest(mClient,
+                            mDiscoveryRequestRouteTypes, mDiscoverRequestActiveScan);
+                } catch (RemoteException ex) {
+                    Log.e(TAG, "Unable to publish media router client discovery request.", ex);
+                }
+            }
+        }
+
+        void publishClientSelectedRoute(boolean explicit) {
+            if (mClient != null) {
+                try {
+                    mMediaRouterService.setSelectedRoute(mClient,
+                            mSelectedRoute != null ? mSelectedRoute.mGlobalRouteId : null,
+                            explicit);
+                } catch (RemoteException ex) {
+                    Log.e(TAG, "Unable to publish media router client selected route.", ex);
+                }
+            }
+        }
+
+        void updateClientState() {
+            // Update the client state.
+            mClientState = null;
+            if (mClient != null) {
+                try {
+                    mClientState = mMediaRouterService.getState(mClient);
+                } catch (RemoteException ex) {
+                    Log.e(TAG, "Unable to retrieve media router client state.", ex);
+                }
+            }
+            final ArrayList<MediaRouterClientState.RouteInfo> globalRoutes =
+                    mClientState != null ? mClientState.routes : null;
+            final String globallySelectedRouteId = mClientState != null ?
+                    mClientState.globallySelectedRouteId : null;
+
+            // Add or update routes.
+            final int globalRouteCount = globalRoutes != null ? globalRoutes.size() : 0;
+            for (int i = 0; i < globalRouteCount; i++) {
+                final MediaRouterClientState.RouteInfo globalRoute = globalRoutes.get(i);
+                RouteInfo route = findGlobalRoute(globalRoute.id);
+                if (route == null) {
+                    route = makeGlobalRoute(globalRoute);
+                    addRouteStatic(route);
+                } else {
+                    updateGlobalRoute(route, globalRoute);
+                }
+            }
+
+            // Synchronize state with the globally selected route.
+            if (globallySelectedRouteId != null) {
+                final RouteInfo route = findGlobalRoute(globallySelectedRouteId);
+                if (route == null) {
+                    Log.w(TAG, "Could not find new globally selected route: "
+                            + globallySelectedRouteId);
+                } else if (route != mSelectedRoute) {
+                    if (DEBUG) {
+                        Log.d(TAG, "Selecting new globally selected route: " + route);
+                    }
+                    selectRouteStatic(route.mSupportedTypes, route, false);
+                }
+            } else if (mSelectedRoute != null && mSelectedRoute.mGlobalRouteId != null) {
+                if (DEBUG) {
+                    Log.d(TAG, "Unselecting previous globally selected route: " + mSelectedRoute);
+                }
+                selectDefaultRouteStatic();
+            }
+
+            // Remove defunct routes.
+            outer: for (int i = mRoutes.size(); i-- > 0; ) {
+                final RouteInfo route = mRoutes.get(i);
+                final String globalRouteId = route.mGlobalRouteId;
+                if (globalRouteId != null) {
+                    for (int j = 0; j < globalRouteCount; j++) {
+                        MediaRouterClientState.RouteInfo globalRoute = globalRoutes.get(j);
+                        if (globalRouteId.equals(globalRoute.id)) {
+                            continue outer; // found
+                        }
+                    }
+                    // not found
+                    removeRouteStatic(route);
+                }
+            }
+        }
+
+        void requestSetVolume(RouteInfo route, int volume) {
+            if (route.mGlobalRouteId != null && mClient != null) {
+                try {
+                    mMediaRouterService.requestSetVolume(mClient,
+                            route.mGlobalRouteId, volume);
+                } catch (RemoteException ex) {
+                    Log.w(TAG, "Unable to request volume change.", ex);
+                }
+            }
+        }
+
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
         void requestUpdateVolume(RouteInfo route, int direction) {
             if (route.mGlobalRouteId != null && mClient != null) {
                 try {
@@ -493,11 +635,19 @@ public class MediaRouter {
             boolean volumeChanged = false;
             boolean presentationDisplayChanged = false;
 
+<<<<<<< HEAD
             if (!Objects.equal(route.mName, globalRoute.name)) {
                 route.mName = globalRoute.name;
                 changed = true;
             }
             if (!Objects.equal(route.mDescription, globalRoute.description)) {
+=======
+            if (!Objects.equals(route.mName, globalRoute.name)) {
+                route.mName = globalRoute.name;
+                changed = true;
+            }
+            if (!Objects.equals(route.mDescription, globalRoute.description)) {
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
                 route.mDescription = globalRoute.description;
                 changed = true;
             }

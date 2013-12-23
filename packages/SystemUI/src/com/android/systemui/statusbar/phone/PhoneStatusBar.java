@@ -468,9 +468,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QUICK_TILES_BG_ALPHA),
                     false, this, UserHandle.USER_ALL);
+<<<<<<< HEAD
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.LCD_DENSITY),
                     false, this, UserHandle.USER_ALL);
+=======
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
 
             update();
         }

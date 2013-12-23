@@ -2623,12 +2623,15 @@ public final class Settings {
                 "lockscreen_use_widget_container_carousel";
 
         /**
+<<<<<<< HEAD
          * Custom LCD density
          * @hide
          */
         public static final String LCD_DENSITY = "lcd_density";
 
         /**
+=======
+>>>>>>> ae3b3a18bd3cd0113bf2f753e155cf7989e14e3f
          * @deprecated Use {@link android.provider.Settings.Global#LOW_BATTERY_SOUND}
          * instead
          * @hide
