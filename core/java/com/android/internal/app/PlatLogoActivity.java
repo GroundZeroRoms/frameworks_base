@@ -46,7 +46,7 @@ public class PlatLogoActivity extends Activity {
     int mCount;
     private boolean mIsSlim;
     final Handler mHandler = new Handler();
-    static final int BGCOLOR = 0xffed1d24;
+    static final int BGCOLOR = 0x000000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
