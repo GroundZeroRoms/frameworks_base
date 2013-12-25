@@ -1,0 +1,25 @@
+﻿Revert "Merge commit 'refs/changes/59/459/11' of https://gerrit.slimroms.net/SlimRoms/frameworks_base into vaosp"
+
+This reverts commit a38281c8cffcb94c1c6259b038f3bd2b45f6ca3f, reversing
+changes made to 0db67b17fb3b8c8539bfba95e335a14da9869aa1.
+
+Conflicts:
+	packages/SystemUI/res/values/slim_strings.xml
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch vaosp
+# You are currently reverting commit a38281c.
+#   (all conflicts fixed: run "git revert --continue")
+#   (use "git revert --abort" to cancel the revert operation)
+#
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   core/java/android/provider/Settings.java
+#	modified:   packages/SystemUI/AndroidManifest.xml
+#	modified:   packages/SystemUI/res/values/slim_strings.xml
+#	modified:   packages/SystemUI/src/com/android/systemui/CreateShortcut.java
+#	deleted:    packages/SystemUI/src/com/android/systemui/shortcuts/ChamberOfSecrets.java
+#
+
